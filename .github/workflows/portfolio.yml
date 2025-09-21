@@ -33,7 +33,7 @@ jobs:
         env:
           MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
           MEGA_PASSWORD: ${{ secrets.MEGA_PASSWORD }}
-        run: mega-login "$env:MEGA_EMAIL " "$env:MEGA_PASSWORD"
+        run: mega-login "$env:MEGA_EMAIL" "$env:MEGA_PASSWORD"
 
       # Upload a file
       - name: Upload file to MEGA
