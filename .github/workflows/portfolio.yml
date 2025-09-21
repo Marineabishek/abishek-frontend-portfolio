@@ -13,23 +13,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Download and install MEGAcmd silently
+      # Download & Install MEGAcmd silently
       - name: Install MEGAcmd on Windows
         run: |
           Invoke-WebRequest -Uri "https://mega.nz/MEGAcmdSetup64.exe" -OutFile "MEGAcmdSetup64.exe"
           Start-Process .\MEGAcmdSetup64.exe -ArgumentList "/S" -Wait
 
-      # Add MEGAcmd to PATH (MEGAcmd installs into Program Files)
+      # Manually add MEGAcmd install folder to PATH
       - name: Add MEGAcmd to PATH
         run: |
-          echo "C:\Program Files\MEGAcmd" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          echo "C:\Users\runneradmin\AppData\Local\MEGAcmd" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-      # Login to MEGA (using GitHub secrets)
+      # Verify MEGAcmd is available
+      - name: Verify MEGAcmd
+        run: mega-version
+
+      # Login to MEGA
       - name: MEGA Login
-        run: |
-          mega-login "${{ secrets.abishek.s2606@gmail.com }}" "${{ secrets.Marine@1212 }}"
+        env:
+          MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
+          MEGA_PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+        run: mega-login "$env:MEGA_EMAIL" "$env:MEGA_PASSWORD"
 
-      # Upload a file (example: README.md to a folder in MEGA cloud)
+      # Upload a file
       - name: Upload file to MEGA
-        run: |
-          mega-put README.md /GitHubBackups/
+        run: mega-put README.md /GitHubBackups/
