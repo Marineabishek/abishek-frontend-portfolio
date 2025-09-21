@@ -31,9 +31,9 @@ jobs:
       # Login to MEGA
       - name: MEGA Login
         env:
-          MEGA_EMAIL: ${{ secrets.abishek.s2606@gmail.com }}
-          MEGA_PASSWORD: ${{ secrets.Marine@1212 }}
-        run: mega-login "$env:abishek.s2606@gmail.com" "$env:Marine@1212"
+          MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
+          MEGA_PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+        run: mega-login "$env:MEGA_EMAIL " "$env:MEGA_PASSWORD"
 
       # Upload a file
       - name: Upload file to MEGA
