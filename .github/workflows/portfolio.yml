@@ -27,7 +27,7 @@ jobs:
       # Login to MEGA (using GitHub secrets)
       - name: MEGA Login
         run: |
-          mega-login "${{ secrets.MEGA_EMAIL }}" "${{ secrets.MEGA_PASSWORD }}"
+          mega-login "${{ secrets.abishek.s2606@gmail.com }}" "${{ secrets.Marine@1212 }}"
 
       # Upload a file (example: README.md to a folder in MEGA cloud)
       - name: Upload file to MEGA
